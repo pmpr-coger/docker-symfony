@@ -7,7 +7,7 @@ build: .get-versions
 
 push: build
 	docker image tag $(vendor)/$(app_image_name):$(app_image_version) $(vendor)/$(app_image_name):latest
-	git tag $(app_image_version)$(app_image_version)
+	git tag $(app_image_version)
 	docker push --all-tags $(vendor)/$(app_image_name)
 	git push --tag origin main
 
