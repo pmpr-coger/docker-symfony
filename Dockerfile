@@ -99,12 +99,10 @@ RUN symfony server:ca:install
 COPY files/php.ini/php.ini-development /usr/local/etc/php/php.ini
 COPY files/Xdebug.ini /usr/local/etc/php/php.ini.d/Xdebug.ini
 
-COPY files/entrypoint.sh /usr/bin/entrypoint.sh
+COPY files/cmd.sh /usr/bin/cmd.sh
 
-RUN chmod +x /usr/bin/entrypoint.sh
+RUN chmod +x /usr/bin/cmd.sh
 
 EXPOSE 443
 
-ENTRYPOINT [ "/usr/bin/entrypoint.sh" ]
-
-CMD ["symfony", "server:start", "--port=443"]
+CMD ["/usr/bin/cmd.sh"]
