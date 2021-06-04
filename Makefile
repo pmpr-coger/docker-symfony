@@ -13,6 +13,7 @@ push: build
 	echo "## MÓDULOS ZEND INSTALADOS:" > 02-VERSIONS.md
 	docker run -it --rm pmprcoger/symfony-ssl:$(app_image_version) php --version > PHP_VERSION
 	docker run -it --rm pmprcoger/symfony-ssl:$(app_image_version) symfony version > SYMFONY_VERSION
+	echo "" >> PHP_VERSION
 	cat PHP_VERSION SYMFONY_VERSION >> 02-VERSIONS.md
 	cat 01-README.md 02-VERSIONS.md > README.md
 	rm -rf PHP_VERSION SYMFONY_VERSION 02-VERSIONS.md
