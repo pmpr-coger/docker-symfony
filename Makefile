@@ -7,12 +7,14 @@ build: .get-versions
 
 push: build
 	docker image tag $(vendor)/$(app_image_name):$(app_image_version) $(vendor)/$(app_image_name):latest
+	git tag $(app_image_version)$(app_image_version)
 	docker push --all-tags $(vendor)/$(app_image_name)
+	git push --tag origin main
 
 .get-versions: 
 	echo "## MÓDULOS ZEND INSTALADOS:" > 02-VERSIONS.md
-	docker run -it --rm pmprcoger/symfony-ssl:$(app_image_version) php --version > PHP_VERSION
-	docker run -it --rm pmprcoger/symfony-ssl:$(app_image_version) symfony version > SYMFONY_VERSION
+	docker run -it --rm $(vendor)/$(app_image_name):latest php --version > PHP_VERSION
+	docker run -it --rm $(vendor)/$(app_image_name):latest symfony version > SYMFONY_VERSION
 	echo "" >> PHP_VERSION
 	echo "" >> PHP_VERSION
 	cat PHP_VERSION SYMFONY_VERSION >> 02-VERSIONS.md
