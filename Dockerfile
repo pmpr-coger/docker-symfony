@@ -11,7 +11,7 @@ RUN docker-php-source extract \
 
 RUN ls -al /usr/local/lib/php/extensions/
 
-FROM php:8.0-cli
+FROM php:8.0-fpm
 
 WORKDIR /srv/app
 
@@ -55,9 +55,8 @@ RUN if [ ! -z $http_proxy ]; then pear config-set http_proxy $http_proxy; fi && 
     && if [ ! -z $http_proxy ]; then pear config-set http_proxy ""; fi \
     && docker-php-ext-enable xdebug
 
-
 # instala o xsl
-RUN apt install -y libxslt-dev \
+RUN apt-get install -y libxslt-dev \
     && docker-php-ext-install xsl
 
 # instala mbstring
