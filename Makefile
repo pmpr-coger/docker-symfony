@@ -2,22 +2,28 @@ vendor=pmprcoger
 app_image_name=symfony
 app_image_version=1.0.0
 
-build: #.get-versions
+build: .image-version-test .rm-php-image
 	docker build -t $(vendor)/$(app_image_name):$(app_image_version) --build-arg https_proxy=$(https_proxy) --build-arg http_proxy=$(http_proxy) --build-arg no_proxy=$(no_proxy) .
 	docker image remove php:8.0-fpm
 
-push: .image-version-test build
+push: build .get-versions
 	docker image tag $(vendor)/$(app_image_name):$(app_image_version) $(vendor)/$(app_image_name):latest
 	git tag $(app_image_version)
 	docker push --all-tags $(vendor)/$(app_image_name)
+	git add README.md
+	git commit -m "chore: atualiza README"
 	git push --tag origin main
 
+# busca a versão mais recente do php 8.0
+.rm-php-image:
+	sh test-image-php-exists.sh
+
 # acrescenta informações de versões do php, symfony e composer ao README
-.get-versions: .image-version-test
+.get-versions: 
 	echo "## VERSÕES INSTALADAS:" > 02-VERSIONS.md
-	docker run -it --rm $(vendor)/$(app_image_name):latest php --version > PHP_VERSION
-	docker run -it --rm $(vendor)/$(app_image_name):latest "composer --version" > COMPOSER_VERSION
-	docker run -it --rm $(vendor)/$(app_image_name):latest symfony version > SYMFONY_VERSION
+	docker run -it --rm $(vendor)/$(app_image_name):$(app_image_version) php --version > PHP_VERSION
+	docker run -it --rm $(vendor)/$(app_image_name):$(app_image_version) composer --version > COMPOSER_VERSION
+	docker run -it --rm $(vendor)/$(app_image_name):$(app_image_version) symfony version > SYMFONY_VERSION
 	echo "" >> PHP_VERSION
 	echo "" >> PHP_VERSION
 	echo "" >> COMPOSER_VERSION

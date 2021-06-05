@@ -1,1 +1,0 @@
-## VERSÕES INSTALADAS:
