@@ -20,9 +20,9 @@ push: .image-version-test build
 	echo "" >> PHP_VERSION
 	echo "" >> COMPOSER_VERSION
 	echo "" >> COMPOSER_VERSION
-	cat PHP_VERSION SYMFONY_VERSION >> 02-VERSIONS.md
+	cat PHP_VERSION COMPOSER_VERSION SYMFONY_VERSION >> 02-VERSIONS.md
 	cat 01-README.md 02-VERSIONS.md > README.md
-	rm -rf PHP_VERSION SYMFONY_VERSION 02-VERSIONS.md
+	rm -rf PHP_VERSION COMPOSER_VERSION SYMFONY_VERSION 02-VERSIONS.md
 
 .image-version-test:
 	sh -c "$(PWD)/test-image-version-exists.sh $(vendor) $(app_image_name) $(app_image_version)"
