@@ -103,8 +103,16 @@ COPY files/cmd.sh /usr/bin/cmd.sh
 
 RUN chmod +x /usr/bin/cmd.sh
 
+RUN apt-get install -y iproute2
+
+COPY files/entrypoint.sh /usr/bin/entrypoint.sh
+
+RUN chmod +x /usr/bin/entrypoint.sh
+
 RUN apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
 EXPOSE 443
+
+ENTRYPOINT ["entrypoint.sh"]
 
 CMD ["/usr/bin/cmd.sh"]

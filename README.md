@@ -83,7 +83,7 @@ Zend Engine v4.0.6, Copyright (c) Zend Technologies
     with Xdebug v3.0.4, Copyright (c) 2002-2021, by Derick Rethans
 
 
-Xdebug: [Step Debug] Could not connect to debugging client. Tried: dockerhost:9003 (through xdebug.client_host/xdebug.client_port) :-(
+Xdebug: [Step Debug] Could not connect to debugging client. Tried: dockerhost:9003 (fallback through xdebug.client_host/xdebug.client_port) :-(
 [32mComposer[39m version [33m2.1.1[39m 2021-06-04 08:46:46
 
 
