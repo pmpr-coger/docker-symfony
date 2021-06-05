@@ -12,11 +12,14 @@ push: .image-version-test build
 	git push --tag origin main
 
 .get-versions: 
-	echo "## MÓDULOS ZEND INSTALADOS:" > 02-VERSIONS.md
+	echo "## VERSÕES INSTALADAS:" > 02-VERSIONS.md
 	docker run -it --rm $(vendor)/$(app_image_name):latest php --version > PHP_VERSION
+	docker run -it --rm $(vendor)/$(app_image_name):latest composer --version > COMPOSER_VERSION
 	docker run -it --rm $(vendor)/$(app_image_name):latest symfony version > SYMFONY_VERSION
 	echo "" >> PHP_VERSION
 	echo "" >> PHP_VERSION
+	echo "" >> COMPOSER_VERSION
+	echo "" >> COMPOSER_VERSION
 	cat PHP_VERSION SYMFONY_VERSION >> 02-VERSIONS.md
 	cat 01-README.md 02-VERSIONS.md > README.md
 	rm -rf PHP_VERSION SYMFONY_VERSION 02-VERSIONS.md
