@@ -97,11 +97,13 @@ RUN symfony server:ca:install
 
 # configuração do php
 COPY files/php.ini/php.ini-development /usr/local/etc/php/php.ini
-COPY files/Xdebug.ini /usr/local/etc/php/php.ini.d/Xdebug.ini
+COPY files/Xdebug.ini /usr/local/etc/php/conf.d/Xdebug.ini
 
 COPY files/cmd.sh /usr/bin/cmd.sh
 
 RUN chmod +x /usr/bin/cmd.sh
+
+RUN apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
 EXPOSE 443
 

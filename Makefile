@@ -1,6 +1,6 @@
 vendor=pmprcoger
 app_image_name=symfony
-app_image_version=1.0.0
+app_image_version=1.0.1
 
 build: .get-versions
 	docker build -t $(vendor)/$(app_image_name):$(app_image_version) --build-arg https_proxy=$(https_proxy) --build-arg http_proxy=$(http_proxy) --build-arg no_proxy=$(no_proxy) .
@@ -11,7 +11,7 @@ push: .image-version-test build
 	docker push --all-tags $(vendor)/$(app_image_name)
 	git push --tag origin main
 
-.get-versions: 
+.get-versions: .image-version-test
 	echo "## VERSÕES INSTALADAS:" > 02-VERSIONS.md
 	docker run -it --rm $(vendor)/$(app_image_name):latest php --version > PHP_VERSION
 	docker run -it --rm $(vendor)/$(app_image_name):latest composer --version > COMPOSER_VERSION
