@@ -97,7 +97,7 @@ RUN symfony server:ca:install
 
 # configuração do php
 COPY files/php.ini/php.ini-development /usr/local/etc/php/php.ini
-COPY files/Xdebug.ini /usr/local/etc/php/conf.d/Xdebug.ini
+COPY files/Xdebug.ini /usr/local/etc/php/conf.d/xdebug.conf.ini
 
 COPY files/cmd.sh /usr/bin/cmd.sh
 

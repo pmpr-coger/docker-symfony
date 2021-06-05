@@ -1,6 +1,6 @@
 vendor=pmprcoger
 app_image_name=symfony
-app_image_version=1.0.1
+app_image_version=1.0.0
 
 build: .get-versions
 	docker build -t $(vendor)/$(app_image_name):$(app_image_version) --build-arg https_proxy=$(https_proxy) --build-arg http_proxy=$(http_proxy) --build-arg no_proxy=$(no_proxy) .
