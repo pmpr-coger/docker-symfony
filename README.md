@@ -80,11 +80,9 @@ PHP 8.0.7 (cli) (built: Jun  4 2021 18:46:16) ( NTS )
 Copyright (c) The PHP Group
 Zend Engine v4.0.7, Copyright (c) Zend Technologies
     with Zend OPcache v8.0.7, Copyright (c), by Zend Technologies
-    with Xdebug v3.0.4, Copyright (c) 2002-2021, by Derick Rethans
 
 
-Xdebug: [Step Debug] Could not connect to debugging client. Tried: dockerhost:9003 (fallback through xdebug.client_host/xdebug.client_port) :-(
-[32mComposer[39m version [33m2.1.1[39m 2021-06-04 08:46:46
+[32mComposer[39m version [33m2.1.3[39m 2021-06-09 16:31:20
 
 
 Symfony CLI version [32mv4.25.2[39m (2021-05-28T15:33:16+0000 - stable)
