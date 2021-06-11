@@ -1,13 +1,25 @@
+.DEFAULT_GOAL := build
+
 vendor=pmprcoger
 app_image_name=symfony
 app_image_version=1.0.0
 
-build: .image-version-test .rm-php-image
-	docker build -t $(vendor)/$(app_image_name):$(app_image_version) --build-arg https_proxy=$(https_proxy) --build-arg http_proxy=$(http_proxy) --build-arg no_proxy=$(no_proxy) .
+build:
+	make -s .build-prod
+	make -s .build-dev
+
+.build-dev: .image-version-test .rm-php-image
+	docker build -f dev/Dockerfile -t $(vendor)/$(app_image_name):$(app_image_version)-dev --build-arg https_proxy=$(https_proxy) --build-arg http_proxy=$(http_proxy) --build-arg no_proxy=$(no_proxy) .
+	docker image tag $(vendor)/$(app_image_name):$(app_image_version)-dev $(vendor)/$(app_image_name):latest-dev
+
+.build-prod: .image-version-test .rm-php-image
+	docker build -f prod/Dockerfile -t $(vendor)/$(app_image_name):$(app_image_version) --build-arg https_proxy=$(https_proxy) --build-arg http_proxy=$(http_proxy) --build-arg no_proxy=$(no_proxy) .
+	docker image tag $(vendor)/$(app_image_name):$(app_image_version) $(vendor)/$(app_image_name):$(app_image_version)-prod
+	docker image tag $(vendor)/$(app_image_name):$(app_image_version) $(vendor)/$(app_image_name):latest-prod
+	docker image tag $(vendor)/$(app_image_name):$(app_image_version) $(vendor)/$(app_image_name):latest
 	docker image remove php:8.0-fpm
 
 push: build .get-versions
-	docker image tag $(vendor)/$(app_image_name):$(app_image_version) $(vendor)/$(app_image_name):latest
 	git tag $(app_image_version)
 	docker push --all-tags $(vendor)/$(app_image_name)
 	git add README.md
@@ -21,9 +33,9 @@ push: build .get-versions
 # acrescenta informações de versões do php, symfony e composer ao README
 .get-versions: 
 	echo "## VERSÕES INSTALADAS:" > 02-VERSIONS.md
-	docker run -it --rm $(vendor)/$(app_image_name):$(app_image_version) php --version > PHP_VERSION
-	docker run -it --rm $(vendor)/$(app_image_name):$(app_image_version) composer --version > COMPOSER_VERSION
-	docker run -it --rm $(vendor)/$(app_image_name):$(app_image_version) symfony version > SYMFONY_VERSION
+	docker run -it --rm $(vendor)/$(app_image_name):$(app_image_version)-prod php --version > PHP_VERSION
+	docker run -it --rm $(vendor)/$(app_image_name):$(app_image_version)-prod composer --version > COMPOSER_VERSION
+	docker run -it --rm $(vendor)/$(app_image_name):$(app_image_version)-prod symfony version > SYMFONY_VERSION
 	echo "" >> PHP_VERSION
 	echo "" >> PHP_VERSION
 	echo "" >> COMPOSER_VERSION
@@ -34,5 +46,6 @@ push: build .get-versions
 
 # testa se a tag da imagem já não foi enviada para o dockerhub
 .image-version-test:
-	sh -c "$(PWD)/test-image-version-exists.sh $(vendor) $(app_image_name) $(app_image_version)"
+	sh -c "$(PWD)/test-image-version-exists.sh $(vendor) $(app_image_name) $(app_image_version)-dev"
+	sh -c "$(PWD)/test-image-version-exists.sh $(vendor) $(app_image_name) $(app_image_version)-prod"
 
