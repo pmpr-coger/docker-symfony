@@ -1,4 +1,4 @@
-FROM php:8.0-fpm AS ext-amqp
+FROM php:8.0.8-fpm AS ext-amqp
 
 ENV EXT_AMQP_VERSION=master
 
@@ -11,7 +11,7 @@ RUN docker-php-source extract \
 
 RUN ls -al /usr/local/lib/php/extensions/
 
-FROM php:8.0-fpm
+FROM php:8.0.8-fpm
 
 WORKDIR /srv/app
 

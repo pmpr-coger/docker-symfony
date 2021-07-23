@@ -2,7 +2,8 @@
 
 vendor=pmprcoger
 app_image_name=symfony
-app_image_version=1.0.0
+app_image_version=1.0.1
+php_version=php:8.0.8-fpm
 
 build:
 	make -s .build-prod
@@ -17,7 +18,7 @@ build:
 	docker image tag $(vendor)/$(app_image_name):$(app_image_version) $(vendor)/$(app_image_name):$(app_image_version)-prod
 	docker image tag $(vendor)/$(app_image_name):$(app_image_version) $(vendor)/$(app_image_name):latest-prod
 	docker image tag $(vendor)/$(app_image_name):$(app_image_version) $(vendor)/$(app_image_name):latest
-	docker image remove php:8.0-fpm
+	docker image remove $(php_version)
 
 push: build .get-versions
 	git tag $(app_image_version)
