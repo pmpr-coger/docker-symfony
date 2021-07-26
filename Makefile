@@ -2,7 +2,7 @@
 
 vendor=pmprcoger
 app_image_name=symfony
-app_image_version=1.0.1
+app_image_version=1.0.2
 php_version=php:8.0.8-fpm
 
 build:
