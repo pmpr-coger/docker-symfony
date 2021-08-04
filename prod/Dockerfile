@@ -92,8 +92,4 @@ RUN apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/
 
 EXPOSE 9000
 
-RUN mkdir -p /srv/storage
-
-VOLUME /srv/storage
-
 CMD ["php-fpm"]

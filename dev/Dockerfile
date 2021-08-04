@@ -27,6 +27,10 @@ RUN apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/
 
 EXPOSE 443
 
+RUN mkdir -p /srv/storage && chmod -R +w /srv/storage
+
+VOLUME /srv/storage
+
 ENTRYPOINT ["entrypoint.sh"]
 
 CMD ["/usr/bin/cmd.sh"]
