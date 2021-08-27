@@ -2,8 +2,8 @@
 
 vendor=pmprcoger
 app_image_name=symfony
-app_image_version=1.0.5
-php_version=php:8.0.9-fpm
+app_image_version=1.0.6
+php_version=php:8.0.10-fpm
 
 build:
 	make -s .build-prod
