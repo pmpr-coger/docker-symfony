@@ -76,13 +76,13 @@ $ docker run --rm pmprcoger/symfony:latest cat /usr/local/etc/php/php.ini > my-p
 - Zend OPcache
 
 ## VERSÕES INSTALADAS:
-PHP 8.0.9 (cli) (built: Jul 30 2021 00:44:38) ( NTS )
+PHP 8.0.10 (cli) (built: Aug 26 2021 21:59:02) ( NTS )
 Copyright (c) The PHP Group
-Zend Engine v4.0.9, Copyright (c) Zend Technologies
-    with Zend OPcache v8.0.9, Copyright (c), by Zend Technologies
+Zend Engine v4.0.10, Copyright (c) Zend Technologies
+    with Zend OPcache v8.0.10, Copyright (c), by Zend Technologies
 
 
-[32mComposer[39m version [33m2.1.5[39m 2021-07-23 10:35:47
+[32mComposer[39m version [33m2.1.6[39m 2021-08-19 17:11:08
 
 
-Symfony CLI version [32mv4.25.4[39m (2021-06-18T15:09:49+0000 - stable)
+Symfony CLI version [32mv4.25.6[39m (2021-08-27T08:30:27+0000 - stable)
